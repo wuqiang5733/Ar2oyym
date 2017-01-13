@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Yora</string>
+    <string name="ChooserAvatar">Chooser Avatar</string>
+    <string name="ProfileDisplayName">DisplayName</string>
+    <string name="ProfileEmail">Email</string>
+    <string name="ActivityInbox">Inbox</string>
+    <string name="ActivitySentMessages">Sent Messages</string>
+    <string name="ActivityContacts">Contacts</string>
+    <string name="ActivityProfile">Profile</string>
+    <string name="ActivityLogout">Logout</string>
+    <string name="ProfileTapToChange">Tap to change</string>
+    <string name="LotoutTip">You have logged out!</string>
+
+    <string name="ChangePasswordDialogUpdate">Update</string>
+    <string name="ChangePasswordDialogCancel">Cancel</string>
+    <string name="ChangePasswordDialogChangePassword">Change Password</string>
+
+    <string name="ChangePasswordDialogCurrent_password">current password</string>
+    <string name="ChangePasswordDialogNew_password">New Password</string>
+    <string name="ChangePasswordDialogConfirm_new_password">Confirm New Password</string>
+    <string name="ChangePasswordDialogPasswordUpdated">Password Updated!</string>
+
+    <string name="ServiceResponseShowErrorToast">Can\'t create error toast</string>
+
+
+</resources>

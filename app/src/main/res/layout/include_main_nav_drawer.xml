@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/nav_drawer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="start"
+    android:background="#fff"
+    android:minWidth="300dp"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#0D47A1">
+        <!--ImageView for avatar-->
+        <ImageView
+            android:id="@+id/include_main_nav_drawer_avatar"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_margin="16dp"
+            android:src="@mipmap/ic_launcher" />
+        <!--头像旁边的文字-->
+        <TextView
+            android:id="@+id/include_main_nav_drawer_displayName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/include_main_nav_drawer_avatar"
+            android:layout_toEndOf="@id/include_main_nav_drawer_avatar"
+            android:text="Dariush Lotfi"
+            android:textColor="#8affffff" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <!--Inbox , Send Message , Contacts  , Profile 就在这个 LinearLayout 当中-->
+        <LinearLayout
+            android:id="@+id/include_main_nav_drawer_topItems"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+    </ScrollView>
+    <!--Logout 菜单就在下面这个 LinearLayout 当中-->
+    <LinearLayout
+        android:id="@+id/include_main_nav_drawer_bottomItems"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#E3F2FD"
+        android:orientation="vertical" />
+
+</LinearLayout>

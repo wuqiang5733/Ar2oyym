@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <EditText
+        android:id="@+id/fragment_login_userName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:hint="UserName"
+        android:singleLine="true" />
+
+    <EditText
+        android:id="@+id/fragment_login_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/fragment_login_userName"
+        android:layout_marginBottom="8dp"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:singleLine="true" />
+
+    <Button
+        android:id="@+id/fragment_login_loginButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/fragment_login_password"
+        android:background="@color/colorPrimaryDarker"
+        android:text="Log In"
+        android:textColor="#ffffffff" />
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/activity_login_progressBar"
+        android:layout_alignTop="@id/fragment_login_loginButton"
+        android:layout_alignBottom="@id/fragment_login_loginButton"
+        android:layout_centerHorizontal="true"
+        android:indeterminateOnly="true"
+        android:visibility="gone"
+        style="?android:attr/progressBarStyleInverse"
+        />
+
+</RelativeLayout><!--从主界面（四个启动项的那个界面）的第一个启动项启动的那个 Fragment，不包括界面的头部-->
