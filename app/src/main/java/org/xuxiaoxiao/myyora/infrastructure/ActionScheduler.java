@@ -101,3 +101,30 @@ public class ActionScheduler {
         }
     }
 }
+/*
+
+这是一种可以创建多线程消息的函数
+使用方法：
+1，首先创建一个Handler对象
+Handler handler=new Handler();
+2，然后创建一个Runnable对象
+Runnable runnable=new Runnable(){
+   @Override
+   public void run() {
+    // TODO Auto-generated method stub
+    //要做的事情，这里再次调用此Runnable对象，以实现每两秒实现一次的定时器操作
+    handler.postDelayed(this, 2000);
+   }
+};
+3，使用PostDelayed方法，两秒后调用此Runnable对象
+handler.postDelayed(runnable, 2000);
+实际上也就实现了一个2s的一个定时器
+4，如果想要关闭此定时器，可以这样操作
+handler.removeCallbacks(runnable);
+
+当然，你也可以做一个闹钟提醒延时的函数试试，比如，先用MediaPlayer播放闹钟声音，
+如果不想起，被停止播放之后，下次就5分钟后再播放，再被停止的话，下次就4分钟后播放，
+………………
+只要更改延时的时间就可以实现了，用一个static对象的话会比较容易操作。
+
+ */

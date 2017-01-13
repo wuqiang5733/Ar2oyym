@@ -10,5 +10,6 @@
     <color name="contacts_pending_contacts_request">#607D8B</color>
     <color name="list_item_message_background_selected">#8C9EFE</color>
     <color name="list_item_message_background">#eee</color>
-    <color name="list_item_message_background_unread">#FFF2CF</color>
+    <color name="list_item_message_background_unread">#e9be4b</color>
+    <!--<color name="list_item_message_background_unread">#FFF2CF</color>-->
 </resources>

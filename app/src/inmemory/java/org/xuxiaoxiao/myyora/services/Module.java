@@ -7,5 +7,6 @@ public class Module {
         // It won't be garbage collected because Bus holds a reference to it
         new org.xuxiaoxiao.myyora.services.InMemoryAccountService(application);
         new org.xuxiaoxiao.myyora.services.InMemoryContactService(application);
+        new org.xuxiaoxiao.myyora.services.InMemoryMessageService(application);
     }
 }

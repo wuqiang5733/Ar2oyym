@@ -39,10 +39,12 @@ public class MessageViewHolder extends RecyclerView.ViewHolder {
         String createdAt = DateUtils.formatDateTime(
                 context,
                 message.getCreatedAt().getTimeInMillis(),
+                // DateUtils.FORMAT_SHOW_DATE 会显示：January 13，Note2上会显示：1月13日
+                // DateUtils.FORMAT_SHOW_TIME 会显示 10：00 PM，Note2上会显示：22:00
                 DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_TIME);
 
         _sentReceived.setText(message.isFromUs() ? "sent " : "received ");
-        _displayName.setText(message.getOtherUser().getDisplayName());
+        _displayName.setText(message.getOtherUser().getDisplayName());  //  User [?]
         _createdAt.setText(createdAt);
 
         int colorResourceId;
@@ -50,6 +52,7 @@ public class MessageViewHolder extends RecyclerView.ViewHolder {
             colorResourceId = R.color.list_item_message_background_selected;
             _cardView.setCardElevation(5);
         } else if (message.isRead()) {
+            // 在 InMemoryMessageService 当中的 SearchMessages 头五个消息被设置为 未读
             colorResourceId = R.color.list_item_message_background;
             _cardView.setCardElevation(2);
         } else {
