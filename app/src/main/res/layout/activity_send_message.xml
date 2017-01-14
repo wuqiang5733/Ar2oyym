@@ -1,18 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#000">
 
     <include
-        layout="@layout/include_toolbar"
-        android:id="@+id/include_toolbar"/>
+        android:id="@+id/include_toolbar"
+        layout="@layout/include_toolbar" />
 
     <ImageView
+        android:id="@+id/activity_send_message_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/include_toolbar"
-        android:id="@+id/activity_send_message_image"/>
+        android:layout_below="@id/include_toolbar" />
+
+    <LinearLayout
+        android:id="@+id/activity_send_message_optionsFrame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#EE37474F"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <EditText
+            android:id="@+id/activity_send_message_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:hint="Message"
+            android:singleLine="true"
+            android:textColor="#fff"
+            android:textColorHint="#999" />
+
+        <Button
+            android:id="@+id/activity_send_message_recipient"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start|center_vertical"
+            android:text="Choose Recipient" />
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/activity_send_message_progressFrame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#2196F3"
+        android:clickable="true"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminate="true" />
+
+    </FrameLayout>
 
 </RelativeLayout>

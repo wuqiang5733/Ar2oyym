@@ -26,7 +26,9 @@ import java.util.ArrayList;
 public class ContactActivity extends BaseAuthenticatedActivity implements MessagesAdapter.OnMessageClickedListener {
     public static final String EXTRA_USER_DETAILS = "EXTRA_USER_DETAILS";
     public static final int RESULT_USER_REMOVED = 101;
+
     private static final int REQUEST_VIEW_MESSAGE = 1;
+    private static final int REQUEST_SEND_MESSAGE = 2;
 
     private UserDetails _userDetails;
     private MessagesAdapter _adapter;
@@ -77,27 +79,27 @@ public class ContactActivity extends BaseAuthenticatedActivity implements Messag
         intent.putExtra(MessageActivity.EXTRA_MESSAGE, message);
         startActivityForResult(intent, REQUEST_VIEW_MESSAGE);
     }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode != REQUEST_VIEW_MESSAGE || resultCode != MessageActivity.RESULT_MESSAGE_DELETED) {
-            return;
-        }
-
-        int messageId = data.getIntExtra(MessageActivity.RESULT_EXTRA_MESSAGE_ID, -1);
-        if (messageId == -1) {
-            return;
-        }
-
-        for (int i = 0; i < _messages.size(); i++) {
-            Message message = _messages.get(i);
-            if (message.getId() == messageId) {
-                _messages.remove(i);
-                _adapter.notifyItemRemoved(i);
-                break;
-            }
-        }
-    }
+//
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        if (requestCode != REQUEST_VIEW_MESSAGE || resultCode != MessageActivity.RESULT_MESSAGE_DELETED) {
+//            return;
+//        }
+//
+//        int messageId = data.getIntExtra(MessageActivity.RESULT_EXTRA_MESSAGE_ID, -1);
+//        if (messageId == -1) {
+//            return;
+//        }
+//
+//        for (int i = 0; i < _messages.size(); i++) {
+//            Message message = _messages.get(i);
+//            if (message.getId() == messageId) {
+//                _messages.remove(i);
+//                _adapter.notifyItemRemoved(i);
+//                break;
+//            }
+//        }
+//    }
 
     @Subscribe
     public void onMessagesLoaded(final Messages.SeacrhMessagesResponse response) {
@@ -151,7 +153,7 @@ public class ContactActivity extends BaseAuthenticatedActivity implements Messag
         if (itemId == R.id.activity_contact_menuNewMessage) {
             Intent intent = new Intent(this, NewMessageActivity.class);
             intent.putExtra(NewMessageActivity.EXTRA_CONTACT, _userDetails);
-            startActivity(intent);
+            startActivityForResult(intent, REQUEST_SEND_MESSAGE);
             return true;
         }
 
@@ -172,5 +174,6 @@ public class ContactActivity extends BaseAuthenticatedActivity implements Messag
 
         return false;
     }
+
 
 }

@@ -36,6 +36,10 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
         _camera = camera;
         _cameraInfo = cameraInfo;
 
+        if(_camera == null){
+            return; // 这个 if 是后来加上的
+        }
+
         if (!_isSurfaceCreaated || camera == null)
             return;
 
