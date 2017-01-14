@@ -70,4 +70,17 @@ public final class Contacts {
         public int RemovedContactId;
     }
     /***************************************************************************/
+    // Video67 搜索要用
+    public static class SearchUsersRequest {
+        public String Query;
+
+        public SearchUsersRequest(String query) {
+            Query = query;
+        }
+    }
+
+    public static class SearchUsersResponse extends ServiceResponse {
+        public List<UserDetails> Users;
+        public String Query;
+    }
 }
