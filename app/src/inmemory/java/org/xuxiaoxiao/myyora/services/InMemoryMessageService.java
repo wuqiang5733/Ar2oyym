@@ -82,7 +82,7 @@ public class InMemoryMessageService extends BaseInMemoryService {
         Messages.SendMessageResponse response = new Messages.SendMessageResponse();
         if (request.getMessage().equals("error")) {
             response.setOperationError("Something bad happened");
-        } else if (request.getMessage().equals("error-message")) {
+        } else if (request.getMessage().equals("error11")) {
             response.setPropertyError("message", "Invalid message");
         }
         postDelayed(response, 1500, 3000);

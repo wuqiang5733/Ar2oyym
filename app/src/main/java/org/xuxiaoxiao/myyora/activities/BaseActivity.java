@@ -7,7 +7,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.View;
 
 import com.squareup.otto.Bus;
@@ -35,7 +34,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         // @Nullable : Denotes that a parameter,
         // field or method return value can be null.
-        Log.e("BaseActivity","BaseActivity");
+//        Log.e("BaseActivity","BaseActivity");
         super.onCreate(savedInstanceState);
         this.application = (YoraApplication) getApplication();
         bus = application.getBus();
@@ -93,7 +92,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 // field or method return value is expected to be a layout resource reference
 // (e.g. android.R.layout.list_content).
         super.setContentView(layoutResID);
-        Log.e("BaseActivity","setContentView");
+//        Log.e("BaseActivity","setContentView");
         toolbar = (Toolbar) findViewById(R.id.include_toolbar);
         if (toolbar != null)
             setSupportActionBar(toolbar);

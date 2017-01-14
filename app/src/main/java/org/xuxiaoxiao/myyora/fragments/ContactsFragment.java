@@ -72,6 +72,11 @@ public class ContactsFragment extends BaseFragment implements AdapterView.OnItem
                         })
                         .start();
 
+                if (!response.didSucceed()) {
+                    response.showErrorToast(getActivity());
+                    return;
+                }
+
                 _adapter.clear();
                 _adapter.addAll(response.Contacts);
             }

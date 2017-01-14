@@ -11,7 +11,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
@@ -137,7 +136,7 @@ public class NewMessageActivity extends BaseAuthenticatedActivity implements Vie
         try {
             _camera = Camera.open(_currentCameraIndex);
         } catch (Exception e) {
-            Log.e(TAG, "Could not open camera " + _currentCameraIndex, e);
+//            Log.e(TAG, "Could not open camera " + _currentCameraIndex, e);
             Toast.makeText(this, "Error establishing camera!", Toast.LENGTH_LONG).show();
             return;
         }
@@ -158,7 +157,8 @@ public class NewMessageActivity extends BaseAuthenticatedActivity implements Vie
         Bitmap bitmap = processBitmap(data);
 
         ByteArrayOutputStream output = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, output);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 70, output);
+//        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, output);
 
         File outputFile = new File(getCacheDir(), "temp-image");
         outputFile.delete();
@@ -167,7 +167,7 @@ public class NewMessageActivity extends BaseAuthenticatedActivity implements Vie
             fileOutput.write(output.toByteArray());
             fileOutput.close();
         } catch (Exception e) {
-            Log.e(TAG, "Could not save bitmap", e);
+//            Log.e(TAG, "Could not save bitmap", e);
             Toast.makeText(this, "Could not save image to temp directory", Toast.LENGTH_SHORT).show();
             return;
         }

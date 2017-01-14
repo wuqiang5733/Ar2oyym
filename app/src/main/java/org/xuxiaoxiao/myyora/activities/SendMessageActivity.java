@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,7 +27,8 @@ public class SendMessageActivity extends BaseAuthenticatedActivity implements Vi
     public static final String EXTRA_IMAGE_PATH = "EXTRA_IMAGE_PATH";
     public static final String EXTRA_CONTACT = "EXTRA_CONTACT";
 
-    public static final int MAX_IMAGE_HEIGHT = 1280;
+    public static final int MAX_IMAGE_HEIGHT = 1000;
+//    public static final int MAX_IMAGE_HEIGHT = 1280;
 
     private static final String STATE_REQUEST = "STATE_REQUEST";
     private static final int REQUEST_SELECT_RECIPIENT = 1;
@@ -174,7 +176,7 @@ public class SendMessageActivity extends BaseAuthenticatedActivity implements Vi
                     .start();
             return;
         }
-
+        Log.e("SendMessage","执行了");
         setResult(RESULT_OK);
         finish();
     }

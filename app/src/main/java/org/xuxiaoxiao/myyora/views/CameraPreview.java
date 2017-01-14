@@ -12,7 +12,7 @@ import java.util.List;
 public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback {
     private static final String TAG = "CameraPreview";
 
-    private final SurfaceHolder _surfaceHolder;
+    private SurfaceHolder _surfaceHolder;
     private Camera _camera;
     private Camera.CameraInfo _cameraInfo;
     private boolean _isSurfaceCreaated;
@@ -36,7 +36,7 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
         _camera = camera;
         _cameraInfo = cameraInfo;
 
-        if(_camera == null){
+        if (_camera == null) {
             return; // 这个 if 是后来加上的
         }
 
@@ -68,12 +68,12 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
 
     private Camera.Size getClosestSize(int width, int height, List<Camera.Size> supportedSizes) {
         final double ASPECT_TOLERANCE = .1;
-        double targetRatio = (double) height/ width;
+        double targetRatio = (double) height / width;
 
         Camera.Size targetSize = null;
         double minDifference = Double.MAX_VALUE;
 
-        for (Camera.Size size: supportedSizes) {
+        for (Camera.Size size : supportedSizes) {
             double ratio = (double) size.width / size.height;
             if (Math.abs(ratio - targetRatio) > ASPECT_TOLERANCE)
                 continue;
@@ -88,7 +88,7 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
         // If none of supportedSizes is within ASPECT_TOLERANCE, drop the aspect constraint
         if (targetSize == null) {
             minDifference = Double.MAX_VALUE;
-            for (Camera.Size size: supportedSizes) {
+            for (Camera.Size size : supportedSizes) {
                 int heightDifference = Math.abs(size.height - height);
                 if (heightDifference < minDifference) {
                     targetSize = size;
@@ -102,6 +102,11 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
+        if (_surfaceHolder != holder) {
+            _surfaceHolder = holder;
+            _surfaceHolder.addCallback(this);
+        }
+
         _isSurfaceCreaated = true;
 
         if (_camera != null)
@@ -115,11 +120,17 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
 
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
-        if (_camera == null || _surfaceHolder == null)
+        _isSurfaceCreaated = false;
+        _surfaceHolder.removeCallback(this);
+        _surfaceHolder = null;
+
+        if (_camera == null)
             return;
 
         try {
             _camera.stopPreview();
+            _camera = null;
+            _cameraInfo = null;
         } catch (Exception e) {
             Log.e(TAG, "Could not stop camera preview", e);
         }

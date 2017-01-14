@@ -2,6 +2,7 @@ package org.xuxiaoxiao.myyora.activities;
 
 import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
+import android.app.Fragment;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -9,9 +10,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.app.Fragment;
-import android.util.Log;
-
 
 import org.xuxiaoxiao.myyora.R;
 import org.xuxiaoxiao.myyora.fragments.ContactsFragment;
@@ -66,7 +64,7 @@ public class ContactsActivity extends BaseAuthenticatedActivity implements Adapt
 
             fragment = (Fragment) item.getFragment().newInstance();
         } catch (Exception e) {
-            Log.e("ContactsActivity", "Could not instantiate fragment" + item.getFragment().getName(), e);
+//            Log.e("ContactsActivity", "Could not instantiate fragment" + item.getFragment().getName(), e);
             return;
         }
 

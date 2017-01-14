@@ -19,6 +19,7 @@ import android.widget.RelativeLayout;
 
 import com.soundcloud.android.crop.Crop;
 import com.squareup.otto.Subscribe;
+import com.squareup.picasso.Picasso;
 
 import org.xuxiaoxiao.myyora.R;
 import org.xuxiaoxiao.myyora.dialogs.ChangePasswordDialog;
@@ -92,6 +93,10 @@ public class ProfileActivity extends BaseAuthenticatedActivity implements View.O
         // 这个文字可以在 LoginFragment 当中的 onClick 当中设置
         getSupportActionBar().setTitle(user.getDisplayName());
 
+        Picasso.with(this)
+                .load(user.getAvatarUrl())
+                .into(_avatarView);
+
         if (savedInstanceState == null) {
             _displayNameText.setText(user.getDisplayName());//在_displayNameText跟 邮箱名 上也显示用户名
             _emailText.setText(user.getEmail());
@@ -108,6 +113,7 @@ public class ProfileActivity extends BaseAuthenticatedActivity implements View.O
 //
 //        changeState(STATE_VIEWING); // 一进入这个界面的时候是不让编辑的
     }
+
     private void setProgressBarVisible(boolean visible) {
         if (visible) {
             _progressDialog = new ProgressDialog.Builder(this)
@@ -121,9 +127,13 @@ public class ProfileActivity extends BaseAuthenticatedActivity implements View.O
         }
         isProgressBarVisible = visible;
     }
+
     @Subscribe
-    public void UserDetailsUpdated(Account.UserDetailsUpdatedEvent event){
+    public void UserDetailsUpdated(Account.UserDetailsUpdatedEvent event) {
         getSupportActionBar().setTitle(event.User.getDisplayName());
+        Picasso.with(this)
+                .load(event.User.getAvatarUrl())
+                .into(_avatarView);
     }
 
     @Override
@@ -208,13 +218,14 @@ public class ProfileActivity extends BaseAuthenticatedActivity implements View.O
     }
 
     @Subscribe  // 更新头像
-    public void onAvatarUpdated(Account.ChangeAvatarResponse response){
+    public void onAvatarUpdated(Account.ChangeAvatarResponse response) {
         _avatarProgressFrame.setVisibility(View.GONE);//头像上转的那个圈
         if (!response.didSucceed())
             response.showErrorToast(this);
 //        _avatarView.setImageResource(0); // Force ImageView to refresh image despite its Uri not changed
 //        _avatarView.setImageURI(Uri.fromFile(_tempOutputFile));
     }
+
     @Subscribe // 更新 Profile   ， _displayNameText与邮箱
     public void onProfileUpdated(Account.UpdateProfileResponse response) {
         if (!response.didSucceed()) {
@@ -241,7 +252,7 @@ public class ProfileActivity extends BaseAuthenticatedActivity implements View.O
         if (itemId == R.id.activity_profile_menuEdit) {
             changeState(STATE_EDITING);
             return true;
-        }else if (itemId == R.id.activity_profile_menuChangePassword) {
+        } else if (itemId == R.id.activity_profile_menuChangePassword) {
             FragmentTransaction transaction = getFragmentManager()
                     .beginTransaction()
                     .addToBackStack(null); // When we hit back key the transaction will be undone

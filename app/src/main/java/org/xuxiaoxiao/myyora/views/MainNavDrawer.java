@@ -5,6 +5,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.otto.Subscribe;
+import com.squareup.picasso.Picasso;
 
 import org.xuxiaoxiao.myyora.R;
 import org.xuxiaoxiao.myyora.activities.BaseActivity;
@@ -46,11 +47,16 @@ public class MainNavDrawer extends NavDrawer {
         // 从 User 类当中提取文字，然后在 NavDrawer 上面显示
         // 这个文字可以在 LoginFragment 当中的 onClick 当中设置
 
-        // TODO: change avatar image to avatarUrl from loggedInUser
+        Picasso.with(activity)
+                .load(loggedInUser.getAvatarUrl())
+                .into(_avatarImage);
     }
     @Subscribe
     public void UserDetailsUpdated(Account.UserDetailsUpdatedEvent event){
         // TODO update avatar URL
+        Picasso.with(activity)
+                .load(event.User.getAvatarUrl())
+                .into(_avatarImage);
         _displayNameText.setText(event.User.getDisplayName());
     }
 }

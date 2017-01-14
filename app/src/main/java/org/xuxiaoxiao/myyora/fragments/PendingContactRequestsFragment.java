@@ -31,21 +31,49 @@ public class PendingContactRequestsFragment extends BaseFragment {
         return view;
     }
 
+    //    @Subscribe
+//    public void onGetContactRequests(Contacts.GetContactRequestsResponse response) {
+//        response.showErrorToast(getActivity());
+//        _progressFrame.animate()
+//                .alpha(0)
+//                .setDuration(250)
+//                .withEndAction(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        _progressFrame.setVisibility(View.GONE);
+//                    }
+//                })
+//                .start();
+//
+//        _adapter.clear();
+//        _adapter.addAll(response.Requests);
+//    }
     @Subscribe
-    public void onGetContactRequests(Contacts.GetContactRequestsResponse response) {
-        response.showErrorToast(getActivity());
-        _progressFrame.animate()
-                .alpha(0)
-                .setDuration(250)
-                .withEndAction(new Runnable() {
-                    @Override
-                    public void run() {
-                        _progressFrame.setVisibility(View.GONE);
-                    }
-                })
-                .start();
+    public void onGetContactRequests(final Contacts.GetContactRequestsResponse response) {
+        scheduler.invokeOnResume(Contacts.GetContactRequestsResponse.class, new Runnable() {
+            @Override
+            public void run() {
+                _progressFrame.animate()
+                        .alpha(0)
+                        .setDuration(250)
+                        .withEndAction(new Runnable() {
+                            @Override
+                            public void run() {
+                                _progressFrame.setVisibility(View.GONE);
+                            }
+                        })
+                        .start();
 
-        _adapter.clear();
-        _adapter.addAll(response.Requests);
+                if (!response.didSucceed()) {
+                    response.showErrorToast(getActivity());
+                    return;
+                }
+
+                _adapter.clear();
+                _adapter.addAll(response.Requests);
+            }
+        });
+
     }
+
 }

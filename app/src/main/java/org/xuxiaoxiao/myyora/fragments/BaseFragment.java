@@ -2,7 +2,6 @@ package org.xuxiaoxiao.myyora.fragments;
 
 import android.app.Fragment;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.squareup.otto.Bus;
 
@@ -23,7 +22,7 @@ public abstract class BaseFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         tag = getClass().getSimpleName();
-        Log.i(tag,"-- onCreate");
+//        Log.i(tag,"-- onCreate");
         application = (YoraApplication) getActivity().getApplication();
         scheduler = new ActionScheduler(application);
 

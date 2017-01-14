@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -78,7 +77,7 @@ public class NavDrawer {
         LayoutInflater layoutInflater = activity.getLayoutInflater();
         for (NavDrawerItem item :items) {
             item.inflate(layoutInflater, navDrawerView);  // navDrawerView ： 整个滑动出来的那个界面
-            Log.e("NavDrawer",item.getClass().toString());
+//            Log.e("NavDrawer",item.getClass().toString());
         }
     }
     public static abstract class NavDrawerItem {

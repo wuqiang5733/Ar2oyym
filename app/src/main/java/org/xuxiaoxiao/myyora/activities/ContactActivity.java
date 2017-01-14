@@ -46,9 +46,9 @@ public class ContactActivity extends BaseAuthenticatedActivity implements Messag
             _userDetails = new UserDetails(1, true, "A Contact", "a_contact", "http://www.gravatar.com/avatar/1.jpg");
         }
 
-        getSupportActionBar().setTitle("A Contact");
+//        getSupportActionBar().setTitle("A Contact");
         // 可能从 ContactsFragment 当中没有传过来值
-//        getSupportActionBar().setTitle(_userDetails.getDisplayName());
+        getSupportActionBar().setTitle(_userDetails.getDisplayName());
         toolbar.setNavigationIcon(R.drawable.ic_ab_close);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
