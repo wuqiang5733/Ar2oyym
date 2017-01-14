@@ -57,11 +57,12 @@ public class InMemoryContactService extends BaseInMemoryService {
     private UserDetails createFakeUser(int id, boolean isContact) {
         String idString = Integer.toString(id);
         return new UserDetails(
-                id,
-                isContact,
-                "Contact " + idString,
-                "Contact" + idString,
-                "http://www.gravatar.com/avatar/" + idString + "?d=identicon&s=64"
+                id,                     //    private int _id;
+                isContact,              //    private boolean _isContact;
+                "Contact " + idString,  //    private String _displayName;
+                "Contact" + idString,   //    private String _username;
+                "http://www.gravatar.com/avatar/" + idString + "?d=identicon&s=64"  //    private String _avatarUrl;
         );
     }
 }
+

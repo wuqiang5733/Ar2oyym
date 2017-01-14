@@ -1,14 +1,21 @@
 package org.xuxiaoxiao.myyora.activities;
 
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
+import com.squareup.otto.Subscribe;
+
 import org.xuxiaoxiao.myyora.R;
+import org.xuxiaoxiao.myyora.services.Contacts;
 import org.xuxiaoxiao.myyora.services.Messages;
 import org.xuxiaoxiao.myyora.services.entities.Message;
 import org.xuxiaoxiao.myyora.services.entities.UserDetails;
@@ -37,12 +44,14 @@ public class ContactActivity extends BaseAuthenticatedActivity implements Messag
             _userDetails = new UserDetails(1, true, "A Contact", "a_contact", "http://www.gravatar.com/avatar/1.jpg");
         }
 
-        getSupportActionBar().setTitle(_userDetails.getDisplayName());
+        getSupportActionBar().setTitle("A Contact");
+        // 可能从 ContactsFragment 当中没有传过来值
+//        getSupportActionBar().setTitle(_userDetails.getDisplayName());
         toolbar.setNavigationIcon(R.drawable.ic_ab_close);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                finish();// 点击左上角的那个叉
             }
         });
 
@@ -67,7 +76,7 @@ public class ContactActivity extends BaseAuthenticatedActivity implements Messag
         Intent  intent = new Intent(this, MessageActivity.class);
         intent.putExtra(MessageActivity.EXTRA_MESSAGE, message);
         startActivityForResult(intent, REQUEST_VIEW_MESSAGE);
-    }/*
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -162,6 +171,6 @@ public class ContactActivity extends BaseAuthenticatedActivity implements Messag
         }
 
         return false;
-    }*/
+    }
 
 }
