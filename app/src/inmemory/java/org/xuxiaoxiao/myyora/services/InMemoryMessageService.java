@@ -76,4 +76,15 @@ public class InMemoryMessageService extends BaseInMemoryService {
             postDelayed(response, 2000);
         }
     }
+    // Video 72
+    @Subscribe
+    public void sendMessage(Messages.SendMessageRequest request) {
+        Messages.SendMessageResponse response = new Messages.SendMessageResponse();
+        if (request.getMessage().equals("error")) {
+            response.setOperationError("Something bad happened");
+        } else if (request.getMessage().equals("error-message")) {
+            response.setPropertyError("message", "Invalid message");
+        }
+        postDelayed(response, 1500, 3000);
+    }
 }
