@@ -17,6 +17,7 @@ import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import org.xuxiaoxiao.myyora.R;
+import org.xuxiaoxiao.myyora.services.entities.Message;
 import org.xuxiaoxiao.myyora.services.entities.UserDetails;
 import org.xuxiaoxiao.myyora.views.CameraPreview;
 
@@ -191,7 +192,7 @@ public class NewMessageActivity extends BaseAuthenticatedActivity implements Vie
         // Flip horizontally if using front facing cam
         if (_cameraInfo.facing == Camera.CameraInfo.CAMERA_FACING_FRONT) {
             Matrix matrixMirror = new Matrix();
-            matrixMirror.setValues(new float[] {
+            matrixMirror.setValues(new float[]{
                     -1, 0, 0,
                     0, 1, 0,
                     0, 0, 1
@@ -220,11 +221,23 @@ public class NewMessageActivity extends BaseAuthenticatedActivity implements Vie
         return bitmap;
     }
 
+    //    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        if (requestCode == REQUEST_SEND_MESSAGE && requestCode == RESULT_OK) {
+//            setResult(RESULT_OK);
+//            finish();
+//        }
+//    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_SEND_MESSAGE && requestCode == RESULT_OK) {
+        if (requestCode == REQUEST_SEND_MESSAGE && resultCode == RESULT_OK) {
             setResult(RESULT_OK);
             finish();
+
+            Message message = data.getParcelableExtra(SendMessageActivity.RESULT_MESSAGE);
+            Intent intent = new Intent(this, MessageActivity.class);
+            intent.putExtra(MessageActivity.EXTRA_MESSAGE, message);
+            startActivity(intent);
         }
     }
 }

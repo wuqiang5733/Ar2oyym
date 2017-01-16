@@ -19,6 +19,7 @@ public class MessageViewHolder extends RecyclerView.ViewHolder {
     private TextView _createdAt;
     private CardView _cardView;
     private TextView _sentReceived;
+    private View _backgroundView;
 
     public MessageViewHolder(View itemView) {
         super(itemView);
@@ -27,6 +28,10 @@ public class MessageViewHolder extends RecyclerView.ViewHolder {
         _displayName = (TextView) itemView.findViewById(R.id.list_item_message_displayName);
         _createdAt = (TextView) itemView.findViewById(R.id.list_item_message_createdAt);
         _sentReceived = (TextView) itemView.findViewById(R.id.list_item_message_sentReceived);
+        _backgroundView = itemView.findViewById(R.id.list_item_message_background);
+    }
+    public View getBackgroundView() {
+        return _backgroundView;
     }
 
     public void populate(Context context, Message message) {

@@ -7,6 +7,7 @@ import android.widget.Toast;
 import org.xuxiaoxiao.myyora.R;
 
 import java.util.HashMap;
+import java.util.TreeMap;
 
 public abstract class ServiceResponse {//注意是抽象类
     private static final String TAG = "ServiceResponse";
@@ -14,6 +15,7 @@ public abstract class ServiceResponse {//注意是抽象类
 // _isCritical 一般是程序有 Bug 了
     private String _operationError;
     private HashMap<String, String> _propertyErrors;
+    private TreeMap<String, String> _propertyErrorsCaseInsensitive;
     private boolean _isCritical;
 
     public ServiceResponse () { // 三个构造函数
@@ -45,14 +47,25 @@ public abstract class ServiceResponse {//注意是抽象类
     public void setCritical(boolean critical) {
         this._isCritical = critical;
     }
+    public void setCriticalError(String criticalError) {
+        _isCritical = true;
+        _operationError = criticalError;
+    }
 
     public void setPropertyError(String property, String error) {
         _propertyErrors.put(property, error);
     }
 
-    public String getPropertyError(String property) {
-        return _propertyErrors.get(property);
+//    public String getPropertyError(String property) {
+//        return _propertyErrors.get(property);
+//    }
+public String getPropertyError(String property) {
+    if (_propertyErrorsCaseInsensitive == null || _propertyErrorsCaseInsensitive.size() != _propertyErrors.size()) {
+        _propertyErrorsCaseInsensitive = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+        _propertyErrorsCaseInsensitive.putAll(_propertyErrors);
     }
+    return _propertyErrorsCaseInsensitive.get(property);
+}
 
     public boolean didSucceed() {
         return (_operationError == null || _operationError.isEmpty()) &&

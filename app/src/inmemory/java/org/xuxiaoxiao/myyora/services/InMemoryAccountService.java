@@ -84,10 +84,15 @@ public void updateAvatar(final Account.ChangeAvatarRequest request) {
                 if (request.UserName.equals("wuqiang2"))
                     response.setPropertyError("userName", "Invalid username or password");
 
-                loginUser(response);//就在本 Activity 当中
+//                loginUser(response);//就在本 Activity 当中
+                loginUser(new Account.UserResponse());//就在本 Activity 当中
                 bus.post(response);
             }
         }, 1000, 2000);
+    }
+    @Subscribe
+    public void updateGcmRegistration(Account.UpdateGcmRegistrationRequest request) {
+        postDelayed(new Account.UpdateGcmRegistrationResponse());
     }
     private void loginUser(Account.UserResponse response) {
         Auth auth = application.getAuth();

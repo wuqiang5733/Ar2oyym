@@ -35,9 +35,15 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessageViewHolder> imp
         return new MessageViewHolder(view);
     }
 
+    //    @Override
+//    public void onBindViewHolder(MessageViewHolder holder, int position) {
+//        holder.populate(_activity, _messages.get(position));
+//    }
     @Override
     public void onBindViewHolder(MessageViewHolder holder, int position) {
-        holder.populate(_activity, _messages.get(position));
+        Message message = _messages.get(position);
+        holder.getBackgroundView().setTag(message);
+        holder.populate(_activity, message);
     }
 
     @Override

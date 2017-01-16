@@ -12,7 +12,7 @@ public final class Account {
     // 在 Java 当中也不允许一个文件当中有多个顶层类，这样做，也是为这个目的。
     private Account(){
     }
-    public static abstract class UserResponse extends ServiceResponse {
+    public static  class UserResponse extends ServiceResponse {
         public int Id;
         public String AvatarUrl;
         public String DisplayName;
@@ -33,7 +33,10 @@ public final class Account {
         }
     }
 
-    public static class LoginWithUserNameResponse extends UserResponse {
+//    public static class LoginWithUserNameResponse extends UserResponse {
+//    }
+
+    public static class LoginWithUserNameResponse extends ServiceResponse {
     }
     /*************************************************************************/
     public static class LoginWithLocalTokenRequest {
@@ -108,6 +111,7 @@ public final class Account {
     }
 
     public static class ChangeAvatarResponse extends ServiceResponse {
+        public String AvatarUrl;
 
     }
     /*********************************************************************************************/
@@ -123,6 +127,8 @@ public final class Account {
     }
 
     public static class UpdateProfileResponse extends ServiceResponse {
+        public String DisplayName;
+        public String Email;
     }
     /*********************************************************************************************/
 
@@ -151,6 +157,16 @@ public final class Account {
     /*******************************************************************************/
     public static class myinterface {
 
+    }
+    public static class UpdateGcmRegistrationRequest {
+        public String RegistrationId;
+
+        public UpdateGcmRegistrationRequest(String registrationId) {
+            RegistrationId = registrationId;
+        }
+    }
+
+    public static class UpdateGcmRegistrationResponse extends ServiceResponse {
     }
 
 }

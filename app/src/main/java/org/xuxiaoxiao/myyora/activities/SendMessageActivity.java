@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,6 +25,7 @@ import org.xuxiaoxiao.myyora.services.entities.UserDetails;
 public class SendMessageActivity extends BaseAuthenticatedActivity implements View.OnClickListener {
     public static final String EXTRA_IMAGE_PATH = "EXTRA_IMAGE_PATH";
     public static final String EXTRA_CONTACT = "EXTRA_CONTACT";
+    public static final String RESULT_MESSAGE = "RESULT_MESSAGE";
 
     public static final int MAX_IMAGE_HEIGHT = 1000;
 //    public static final int MAX_IMAGE_HEIGHT = 1280;
@@ -55,6 +55,8 @@ public class SendMessageActivity extends BaseAuthenticatedActivity implements Vi
             Picasso.with(this)
                     .load(imageUri)
                     .into(image);
+
+//            _request.setImagePath(imageUri);
         }
 
         if (_request == null) {
@@ -160,6 +162,7 @@ public class SendMessageActivity extends BaseAuthenticatedActivity implements Vi
     }
 
     @Subscribe
+    // 点击发送之后 执行
     public void onMessageSent(Messages.SendMessageResponse response) {
         if (!response.didSucceed()) {
             response.showErrorToast(this);
@@ -176,8 +179,12 @@ public class SendMessageActivity extends BaseAuthenticatedActivity implements Vi
                     .start();
             return;
         }
-        Log.e("SendMessage","执行了");
-        setResult(RESULT_OK);
+//        Log.e("SendMessage","执行了");
+//        setResult(RESULT_OK);
+//        finish();
+        Intent data = new Intent();
+        data.putExtra(RESULT_MESSAGE, response.Message);
+        setResult(RESULT_OK, data);
         finish();
     }
 }
